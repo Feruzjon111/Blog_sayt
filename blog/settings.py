@@ -125,15 +125,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 import os
 
-# Statik fayllar uchun URL
 STATIC_URL = 'static/'
 
-# Statik fayllar joylashgan papkalarni belgilash
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Statik fayllarni yig‘ish (produktiv rejim uchun)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -143,7 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "/images/"
-MEDIA_ROOT = BASE_DIR / "static/images"
+MEDIA_ROOT = BASE_DIR / ""
 
 
 LOGIN_REDIRECT_URL = 'projects'
