@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
-import dj_database_url
 from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_REDIRECT_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,29 +83,11 @@ WSGI_APPLICATION = "blog.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-#
-import os
+
 import dj_database_url
-from dotenv import load_dotenv
-
-load_dotenv()
-
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+    'default': dj_database_url.parse(os.getenv('DATABASE'))
 }
-
-
-
-# from dotenv import load_dotenv
-# import os
-#
-# load_dotenv()
-#
-# DATABASE_URL = os.getenv('DATABASE')
-# if DATABASE_URL:
-#     DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
-# else:
-#     raise ValueError("DATABASE o‘zgaruvchisi sozlanmagan!")
 
 
 # Password validation
@@ -144,8 +125,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 import os
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+# Statik fayllar uchun URL
+STATIC_URL = 'static/'
+
+# Statik fayllar joylashgan papkalarni belgilash
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Statik fayllarni yig‘ish (produktiv rejim uchun)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -154,8 +142,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/images/"
+MEDIA_ROOT = BASE_DIR / "static/images"
 
 
 LOGIN_REDIRECT_URL = 'projects'
